@@ -1,0 +1,51 @@
+<div class="d-flex justify-content-center align-items-center">
+    <div class="p-5" style="width: 500px;">
+        <form class="d-flex flex-column gap-4" [formGroup]="loginForm" (ngSubmit)="login()">
+            <h2 class="text-center mb-4">@if(showRegister) { Registrarse } @else { Iniciar sesión }</h2>
+            <div>
+                <label for="email" class="form-label">Correo</label>
+                <input formControlName="email" type="email" class="form-control" id="email">
+                @if((email?.hasError("required") || email?.hasError("email")) && email?.touched) {
+                    <div class="text-danger small">Correo inválido</div>
+                }
+            </div>
+            <div>
+                <label for="password" class="form-label">Contraseña</label>
+                <input formControlName="password" type="password" class="form-control" id="password">
+                @if(password?.hasError("required") && password?.touched) {
+                    <div class="text-danger small">Contraseña requerida</div>
+                }
+                @if(password?.hasError("minlength") && password?.touched) {
+                    <div class="text-danger small">Debe tener al menos 6 caracteres</div>
+                }
+            </div>
+            @if(showRegister){
+                <div>
+                    <label for="confirmPassword" class="form-label">Confirmar contraseña</label>
+                    <input formControlName="confirmPassword" type="password" class="form-control" id="confirmPassword">            
+                    @if(confirmPassword?.hasError("confirmPassword") && confirmPassword?.touched) {
+                        <div class="text-danger small">Las contraseñas no coinciden</div>
+                    }
+                </div>
+            }
+            <div class="d-grid gap-3">
+                <button type="submit" class="btn btn-dark py-2">
+                    @if(showRegister) { Registrarse } @else { Iniciar sesión }
+                </button>
+                <button type="button" class="btn btn-outline-secondary py-2" (click)="registerWithGoogle()">
+                    Iniciar sesión con Google
+                </button>
+            </div>
+            <div class="text-center mt-3">
+                @if(showRegister){
+                    ¿Ya tienes una cuenta? <a class="link-dark" (click)="toggleRegister()">Inicia sesión</a>
+                } @else {
+                    ¿No tienes una cuenta? <a class="link-dark" (click)="toggleRegister()">Regístrate</a>
+                }
+            </div>
+            @if(errorMessage){
+                <div class="text-danger text-center small">{{errorMessage}}</div>
+            }
+        </form>
+    </div>
+</div>

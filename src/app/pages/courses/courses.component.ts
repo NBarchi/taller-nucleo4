@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CoursesService } from '../../services/courses/courses.service';
 import { Router, RouterLink } from '@angular/router';
 import { Course } from '../../types/course';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-courses',
@@ -12,10 +13,12 @@ import { Course } from '../../types/course';
 })
 export class CoursesComponent {
   courses: Course[] = [];
+  role: string = 'admin';
 
   constructor(
     private coursesService: CoursesService,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ){}
 
   ngOnInit(){
@@ -38,5 +41,13 @@ export class CoursesComponent {
     this.coursesService.deleteCourse(id)
     .then(() => console.log("Curso Eliminado con Exito"))
     .catch(err => console.log(err));
+  }
+
+  getRole() {
+    this.userService.getCurrentUser()!
+      .then(user => {
+        console.log(user);
+        this.role = user?.["role"]
+      });
   }
 }

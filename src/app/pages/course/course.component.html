@@ -1,11 +1,11 @@
 <nav aria-label="breadcrumb" class="m-5">
     <ol class="breadcrumb bg-transparent text-light">
-        <li class="breadcrumb-item text-dark"><a routerLink="/home" >Home</a></li>
-        <li class="breadcrumb-item text-dark"><a routerLink="/courses">Cursos</a></li>
+        <li class="breadcrumb-item text-dark"><a routerLink="/home" style="text-decoration: none; color: black;" >Home</a></li>
+        <li class="breadcrumb-item text-dark"><a routerLink="/courses" style="text-decoration: none; color: black;">Cursos</a></li>
         <li class="breadcrumb-item active text-dark" aria-current="page">{{ course!.title }}</li>
     </ol>
 </nav>
-<div class="container py-5 text-white align-items-center justify-content-center" style="background-color: #1c1e29; border-radius: 10px;">
+<div class="container py-4 text-white align-items-center justify-content-center" style="background-color: #1c1e29; border-radius: 10px;">
     <div class="row align-items-center">
         <div class="col-md-6">
             <h1 class="fw-bold">{{ course!.title }}</h1>
@@ -18,8 +18,14 @@
             <a routerLink="/courses" class="btn btn-warning">Regresar a la tienda</a>
         </div>
         <div class="col-md-6 text-center">
-            <iframe width="560" height="315" [src]="course!.urlVideo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <img [src]="course!.frontImg" [alt]="course!.title" class="img-fluid rounded shadow" style="max-height: 400px; object-fit: cover;">
         </div>
+    </div>
+</div>
+<div class="container mt-4 p-4 bg-light rounded">
+    <h4 class="mb-3">Introducción al curso</h4>
+    <div class="ratio ratio-16x9">
+        <iframe width="560" height="315" [src]="course!.urlVideo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
 </div>
 
