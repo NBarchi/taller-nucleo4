@@ -1,0 +1,34 @@
+<div class="container py-4">
+    <h1 class="text-center mb-4">Cursos</h1>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <button type="button" class="btn btn-primary" routerLink="/course-form/0">
+            <i class="bi bi-plus-lg"></i> Agregar Curso
+        </button>
+    </div>
+    <div class="row">
+        @for(course of courses; track $index){
+            <div class="col-md-4 col-lg-3 mb-4">
+                <div class="card shadow-sm border-0" (click)="goToCourse(course.id)" style="cursor: pointer;">
+                    <img 
+                        [src]="course.frontImg" 
+                        class="card-img-top" 
+                        style="height: 200px; object-fit: cover;" 
+                        [alt]="course.title">
+                    <div class="card-body">
+                        <h5 class="card-title text-truncate">{{course.title}}</h5>
+                        <p class="text-muted mb-1">{{course.category}} - {{course.level}}</p>
+                        <p class="fw-bold text-primary">$ {{course.price.toFixed(2)}}</p>
+                        <div class="d-flex justify-content-between">
+                            <a [routerLink]="['/course-form', course.id]" class="btn btn-outline-success btn-sm">
+                                <i class="bi bi-pencil"></i> Editar
+                            </a>
+                            <button (click)="deleteCourse($event, course.id)" class="btn btn-outline-danger btn-sm">
+                                <i class="bi bi-trash"></i> Eliminar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
